@@ -1,10 +1,13 @@
 {
   "name": "@andrehadianto/react-mosaicify",
-  "version": "0.0.1",
+  "version": "0.0.8",
   "description": "A lightweight React component for turning data into beautiful, grid-based visualizations.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/andrehadianto"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c --watch --bundleConfigAsCjs",
@@ -20,12 +23,27 @@
     "@tailwindcss/postcss": "^4.1.16",
     "@types/react": "^19.2.2",
     "clsx": "^2.1.1",
-    "react": "^19.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rollup-plugin-dts": "^6.2.3",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "tailwindcss": "^4.1.16",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "@types/react-dom": {
+      "optional": true
+    }
   }
 }

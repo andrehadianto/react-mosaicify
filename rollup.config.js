@@ -30,6 +30,10 @@ export default [
       typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
       postcss({
+        extensions: [".css"],
+        minimize: true,
+        sourceMap: true,
+        modules: true,
         plugins: [
           tailwindcss()
         ]
@@ -46,6 +50,6 @@ export default [
       }
     ],
     plugins: [dts.default()],
-    external: [/\.css/]
+    external: [/\.css$/]
   }
 ]

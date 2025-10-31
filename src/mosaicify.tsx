@@ -64,7 +64,7 @@ const Mosaicify= ({
 
   return (
     <div
-      className={clsx('grid gap-[3px] [grid-auto-flow:dense]', className)}
+      className={clsx('grid gap-[3px] grid-auto-flow:dense', className)}
       style={{ gridTemplateColumns }}
     >
       {gridItems.map((item) => {
@@ -91,7 +91,7 @@ const Mosaicify= ({
           <div
             key={item.id}
             className={clsx(
-              'aspect-square bg-surface-container',
+              'aspect-square bg-slate-600',
               sizeClass,
               gridClassName,
             )}
