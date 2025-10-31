@@ -1,6 +1,6 @@
 {
   "name": "@andrehadianto/react-mosaicify",
-  "version": "0.0.8",
+  "version": "0.0.11",
   "description": "A lightweight React component for turning data into beautiful, grid-based visualizations.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c --watch --bundleConfigAsCjs",
-    "rollup": "rollup -c --bundleConfigAsCjs"
+    "build": "rollup -c --bundleConfigAsCjs"
   },
   "author": "andrehadianto",
   "license": "ISC",

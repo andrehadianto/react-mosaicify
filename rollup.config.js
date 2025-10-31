@@ -33,7 +33,6 @@ export default [
         extensions: [".css"],
         minimize: true,
         sourceMap: true,
-        modules: true,
         plugins: [
           tailwindcss()
         ]
