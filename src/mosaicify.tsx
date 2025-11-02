@@ -30,13 +30,33 @@ interface MosaicifyProps {
    * @defaultValue 20
    */
   numberOfColumns?: number;
+  /**
+   * Minimum number of images to include in the mosaic on each render.
+   * Must be provided together with `maxNumberOfImages`.
+   *
+   * @defaultValue 5
+   */
   minNumberOfImages?: number;
+  /**
+   * Maximum number of images to include in the mosaic on each render.
+   * Must be provided together with `minNumberOfImages`.
+   *
+   * @defaultValue 10
+   */
   maxNumberOfImages?: number;
 }
 
 /**
  * Renders a responsive, dense mosaic grid from a list of items, mixing a
  * randomized selection of images with placeholder tiles for visual variety.
+ *
+ * @remarks
+ * Image selection and tile sizing are randomized per render. The selection is
+ * recomputed when `data` changes. Grid density is achieved via CSS `grid-auto-flow:
+ * dense` and a configurable number of columns.
+ *
+ * @throws Error if only one of `minNumberOfImages` or `maxNumberOfImages` is provided.
+ * @throws Error if `minNumberOfImages` is greater than `maxNumberOfImages`.
  *
  * @param props - {@link MosaicifyProps}
  * @returns A React element containing the mosaic grid.
