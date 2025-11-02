@@ -1,17 +1,52 @@
 import { clsx } from "clsx";
 import { useMemo } from "react";
 
+/**
+ * Props for the `Mosaicify` component.
+ *
+ * @remarks
+ * Supply an array of data objects containing at minimum an `id` and an
+ * `imageUrl`. The component will render a dense CSS grid of square tiles
+ * comprised of a random subset of images and placeholder tiles.
+ */
 interface MosaicifyProps {
   data: {
-    pfp: string;
+    imageUrl: string;
     id: string;
     [key: string]: any;
   }[];
+  /**
+   * Optional CSS class to apply to the outer grid container.
+   */
   className?: string;
+  /**
+   * Optional CSS class to apply to each grid item (image or placeholder).
+   */
   gridClassName?: string;
+  /**
+   * Number of grid columns to render. Higher values produce smaller tiles.
+   *
+   * @defaultValue 20
+   */
   numberOfColumns?: number;
 }
 
+
+/**
+ * Renders a responsive, dense mosaic grid from a list of items, mixing a
+ * randomized selection of images with placeholder tiles for visual variety.
+ *
+ * @param props - {@link MosaicifyProps}
+ * @returns A React element containing the mosaic grid.
+ *
+ * @example
+ * ```tsx
+ * <Mosaicify
+ *   data={[{ id: 'u1', imageUrl: 'https://example.com/u1.jpg' }]}
+ *   numberOfColumns={16}
+ * />
+ * ```
+ */
 const Mosaicify= ({
   data,
   className,
@@ -42,6 +77,13 @@ const Mosaicify= ({
     return allItems.sort(() => Math.random() - 0.5);
   }, [data]);
 
+  /**
+   * Derives a Tailwind size class for an item, biasing placeholders toward
+   * smaller sizes and images toward a prominent size.
+   *
+   * @param item - A grid item enhanced with a `type` discriminant.
+   * @returns A space-delimited Tailwind class string controlling span/rounding.
+   */
   const getSizeClass = (item: (typeof gridItems)[number]) => {
     const imageSizeClasses = ['col-span-4 row-span-4 rounded-lg'];
 
@@ -82,7 +124,7 @@ const Mosaicify= ({
               <img
                 alt={`Profile of ${item.id}`}
                 className="object-cover w-full h-full"
-                src={item.pfp}
+                src={item.imageUrl}
               />
             </div>
           );
