@@ -1,5 +1,5 @@
-import { clsx } from "clsx";
 import { useMemo } from "react";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Props for the `Mosaicify` component.
@@ -13,6 +13,7 @@ interface MosaicifyProps {
   data: {
     imageUrl: string;
     id: string;
+    onClick?: () => void;
     [key: string]: any;
   }[];
   /**
@@ -29,8 +30,9 @@ interface MosaicifyProps {
    * @defaultValue 20
    */
   numberOfColumns?: number;
+  minNumberOfImages?: number;
+  maxNumberOfImages?: number;
 }
-
 
 /**
  * Renders a responsive, dense mosaic grid from a list of items, mixing a
@@ -47,19 +49,38 @@ interface MosaicifyProps {
  * />
  * ```
  */
-const Mosaicify= ({
+const Mosaicify = ({
   data,
   className,
   gridClassName,
   numberOfColumns = 20,
+  minNumberOfImages = 5,
+  maxNumberOfImages = 10,
 }: MosaicifyProps) => {
+  if (
+    (minNumberOfImages && !maxNumberOfImages) ||
+    (!minNumberOfImages && maxNumberOfImages)
+  ) {
+    throw new Error(
+      "minNumberOfImages and maxNumberOfImages must be provided together",
+    );
+  }
+
+  if (minNumberOfImages > maxNumberOfImages) {
+    throw new Error(
+      "minNumberOfImages must be less than or equal to maxNumberOfImages",
+    );
+  }
+
   const gridTemplateColumns = useMemo(
     () => `repeat(${numberOfColumns}, minmax(0, 1fr))`,
     [numberOfColumns],
   );
 
   const gridItems = useMemo(() => {
-    const numberOfImages = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+    const numberOfImages =
+      Math.floor(Math.random() * (maxNumberOfImages - minNumberOfImages + 1)) +
+      minNumberOfImages;
     const actualNumberOfImages = Math.min(numberOfImages, data.length);
 
     const shuffledData = [...data].sort(() => Math.random() - 0.5);
@@ -70,11 +91,12 @@ const Mosaicify= ({
     const allItems = shuffledData.map((item, index) => ({
       ...item,
       type: imageIndices.has(index)
-        ? ('image' as const)
-        : ('placeholder' as const),
+        ? ("image" as const)
+        : ("placeholder" as const),
     }));
 
     return allItems.sort(() => Math.random() - 0.5);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   /**
@@ -85,15 +107,15 @@ const Mosaicify= ({
    * @returns A space-delimited Tailwind class string controlling span/rounding.
    */
   const getSizeClass = (item: (typeof gridItems)[number]) => {
-    const imageSizeClasses = ['col-span-4 row-span-4 rounded-lg'];
+    const imageSizeClasses = ["col-span-4 row-span-4 rounded-lg"];
 
     const placeholderSizeClasses = [
-      ...Array(10).fill('col-span-1 row-span-1 rounded-sm'), // 10 chances for 1x1
-      ...Array(3).fill('col-span-2 row-span-2 rounded-md'), // 3 chances for 2x2
-      ...Array(1).fill('col-span-3 row-span-3 rounded-lg'), // 1 chance for 3x3
+      ...Array(10).fill("col-span-1 row-span-1 rounded-sm"), // 10 chances for 1x1
+      ...Array(3).fill("col-span-2 row-span-2 rounded-md"), // 3 chances for 2x2
+      ...Array(1).fill("col-span-3 row-span-3 rounded-lg"), // 1 chance for 3x3
     ];
 
-    if (item.type === 'image') {
+    if (item.type === "image") {
       return imageSizeClasses[
         Math.floor(Math.random() * imageSizeClasses.length)
       ];
@@ -106,24 +128,26 @@ const Mosaicify= ({
 
   return (
     <div
-      className={clsx('grid gap-[3px] grid-auto-flow:dense', className)}
+      className={twMerge("grid [grid-auto-flow:dense] gap-0.5", className)}
       style={{ gridTemplateColumns }}
     >
       {gridItems.map((item) => {
         const sizeClass = getSizeClass(item);
-        if (item.type === 'image') {
+        if (item.type === "image") {
           return (
             <div
               key={item.id}
-              className={clsx(
-                'aspect-square relative overflow-hidden',
+              className={twMerge(
+                "relative aspect-square overflow-hidden",
+                "bg-slate-600 hover:opacity-80",
                 sizeClass,
                 gridClassName,
               )}
+              onClick={item.onClick}
             >
               <img
                 alt={`Profile of ${item.id}`}
-                className="object-cover w-full h-full"
+                className="h-full w-full object-cover"
                 src={item.imageUrl}
               />
             </div>
@@ -132,11 +156,12 @@ const Mosaicify= ({
         return (
           <div
             key={item.id}
-            className={clsx(
-              'aspect-square bg-slate-600',
+            className={twMerge(
+              "aspect-square bg-slate-600 hover:bg-slate-800",
               sizeClass,
               gridClassName,
             )}
+            onClick={item.onClick}
           />
         );
       })}
