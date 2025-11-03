@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { ComponentPropsWithoutRef, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
 /**
@@ -9,7 +9,7 @@ import { twMerge } from "tailwind-merge";
  * `imageUrl`. The component will render a dense CSS grid of square tiles
  * comprised of a random subset of images and placeholder tiles.
  */
-interface MosaicifyProps {
+interface MosaicifyProps extends ComponentPropsWithoutRef<'div'>{
   data: {
     imageUrl: string;
     id: string;
@@ -19,31 +19,31 @@ interface MosaicifyProps {
   /**
    * Optional CSS class to apply to the outer grid container.
    */
-  className?: string;
+  className?: string | undefined;
   /**
    * Optional CSS class to apply to each grid item (image or placeholder).
    */
-  gridClassName?: string;
+  gridClassName?: string | undefined;
   /**
    * Number of grid columns to render. Higher values produce smaller tiles.
    *
    * @defaultValue 20
    */
-  numberOfColumns?: number;
+  numberOfColumns?: number | undefined;
   /**
    * Minimum number of images to include in the mosaic on each render.
    * Must be provided together with `maxNumberOfImages`.
    *
    * @defaultValue 5
    */
-  minNumberOfImages?: number;
+  minNumberOfImages?: number | undefined;
   /**
    * Maximum number of images to include in the mosaic on each render.
    * Must be provided together with `minNumberOfImages`.
    *
    * @defaultValue 10
    */
-  maxNumberOfImages?: number;
+  maxNumberOfImages?: number | undefined;
 }
 
 /**
