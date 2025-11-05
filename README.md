@@ -1,6 +1,6 @@
 # React Mosaicify
 
-![NPM Version](https://img.shields.io/npm/v/:@andrehadianto/react-mosaicify)
+![NPM Version](https://img.shields.io/npm/v/@andrehadianto/react-mosaicify?&link=https://www.npmjs.com/package/@andrehadianto/react-mosaicify)
 
 
 A lightweight React component for turning data into beautiful, grid-based visualizations.
