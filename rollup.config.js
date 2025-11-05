@@ -16,26 +16,27 @@ export default [
       {
         file: packageJson.main,
         format: "cjs",
-        sourcemap: true
       },
       {
         file: packageJson.module,
         format: "esm",
-        sourcemap: true
       }
     ],
     plugins: [
       resolve(),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      terser(),
       postcss({
         extensions: [".css"],
         minimize: true,
-        sourceMap: true,
         plugins: [
           tailwindcss()
         ]
+      }),
+      terser({
+        format: {
+          comments: false
+        }
       }),
       peerDepsExternal()
     ],

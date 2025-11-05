@@ -7,8 +7,8 @@ A lightweight React component for turning data into beautiful, grid-based visual
 
 ## Features
 
-*   **Responsive Mosaic Grid**: Creates a dense, responsive grid of tiles to visualize data.
-*   **Customizable Grid**: Configure the number of columns to control the size and density of the tiles.
+*   **Lightweight**: 10.7kb gzipped!
+*   **Responsive Mosaic Grid**: Dense, responsive grid of tiles to visualize data.
 
 ## Installation
 
