@@ -29,6 +29,7 @@ export default [
       postcss({
         extensions: [".css"],
         minimize: true,
+        extract: "styles.css",
         plugins: [
           tailwindcss()
         ]

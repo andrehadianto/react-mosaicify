@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "style": "dist/styles.css",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/andrehadianto"
   },
