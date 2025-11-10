@@ -5,10 +5,15 @@
 
 A lightweight React component for turning data into beautiful, grid-based visualizations.
 
+## Demo
+
+<video src="https://github.com/andrehadianto/react-mosaicify/assets/demo.mov" alt="Mosaicify demo" width="480" controls></video>
+
 ## Features
 
 *   **Lightweight**: 10.7kb gzipped!
 *   **Responsive Mosaic Grid**: Dense, responsive grid of tiles to visualize data.
+*   **Tooltip!**: Customise your own tooltip to show on each cell.
 
 ## Installation
 
