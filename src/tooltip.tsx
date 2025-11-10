@@ -61,7 +61,6 @@ const Tooltip = ({
         <div
           className={twMerge(
             "absolute z-10",
-            "rounded-md bg-black px-2 py-1 text-xs text-white",
             "opacity-90 transition-opacity duration-300",
             positionClasses[position],
             alignmentClasses[position][alignment],
