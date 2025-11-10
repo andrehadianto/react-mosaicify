@@ -1,5 +1,7 @@
-import { ComponentPropsWithoutRef, useMemo } from "react";
+import { ComponentPropsWithoutRef, ReactNode, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
+
+import Tooltip from "./tooltip";
 
 /**
  * Props for the `Mosaicify` component.
@@ -9,13 +11,30 @@ import { twMerge } from "tailwind-merge";
  * `imageUrl`. The component will render a dense CSS grid of square tiles
  * comprised of a random subset of images and placeholder tiles.
  */
-interface MosaicifyProps extends ComponentPropsWithoutRef<'div'>{
+interface MosaicifyProps extends ComponentPropsWithoutRef<"div"> {
   data: {
     imageUrl: string;
     id: string;
     onClick?: () => void;
     [key: string]: any;
   }[];
+  /**
+   * Optional function to render tooltip content for each grid item.
+   *
+   * @param item - The data item for the grid cell.
+   * @returns The React node to display in the tooltip.
+   */
+  withTooltip?: (item: MosaicifyProps["data"][number]) => ReactNode;
+  /**
+   * Position of the tooltip.
+   * @defaultValue "top"
+   */
+  tooltipPosition?: "top" | "bottom" | "left" | "right";
+  /**
+   * Alignment of the tooltip.
+   * @defaultValue "center"
+   */
+  tooltipAlignment?: "start" | "center" | "end";
   /**
    * Optional CSS class to apply to the outer grid container.
    */
@@ -76,6 +95,9 @@ const Mosaicify = ({
   numberOfColumns = 20,
   minNumberOfImages = 5,
   maxNumberOfImages = 10,
+  withTooltip,
+  tooltipPosition,
+  tooltipAlignment,
 }: MosaicifyProps) => {
   if (
     (minNumberOfImages && !maxNumberOfImages) ||
@@ -153,37 +175,57 @@ const Mosaicify = ({
     >
       {gridItems.map((item) => {
         const sizeClass = getSizeClass(item);
-        if (item.type === "image") {
+        const tooltipContent = withTooltip ? withTooltip(item) : null;
+
+        const renderItem = () => {
+          if (item.type === "image") {
+            return (
+              <div
+                className={twMerge(
+                  "relative aspect-square overflow-hidden",
+                  "bg-slate-600 hover:opacity-80",
+                  "duration-200 hover:scale-105 hover:shadow-2xl",
+                  sizeClass,
+                  gridClassName,
+                )}
+                onClick={item.onClick}
+              >
+                <img
+                  alt={`Profile of ${item.id}`}
+                  className="h-full w-full object-cover"
+                  src={item.imageUrl}
+                />
+              </div>
+            );
+          }
           return (
             <div
-              key={item.id}
               className={twMerge(
-                "relative aspect-square overflow-hidden",
-                "bg-slate-600 hover:opacity-80",
+                "aspect-square bg-slate-600 hover:bg-slate-800",
+                "duration-200 hover:scale-105 hover:shadow-2xl",
                 sizeClass,
                 gridClassName,
               )}
               onClick={item.onClick}
+            />
+          );
+        };
+
+        if (tooltipContent) {
+          return (
+            <Tooltip
+              key={item.id}
+              alignment={tooltipAlignment}
+              containerClassName={twMerge(sizeClass, gridClassName)}
+              content={tooltipContent}
+              position={tooltipPosition}
             >
-              <img
-                alt={`Profile of ${item.id}`}
-                className="h-full w-full object-cover"
-                src={item.imageUrl}
-              />
-            </div>
+              {renderItem()}
+            </Tooltip>
           );
         }
-        return (
-          <div
-            key={item.id}
-            className={twMerge(
-              "aspect-square bg-slate-600 hover:bg-slate-800",
-              sizeClass,
-              gridClassName,
-            )}
-            onClick={item.onClick}
-          />
-        );
+
+        return renderItem();
       })}
     </div>
   );
