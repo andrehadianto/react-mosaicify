@@ -32,15 +32,20 @@ import Mosaicify from '@andrehadianto/react-mosaicify';
 
 const App = () => {
   const myData = [
-    { id: '1', imageUrl: 'https://example.com/image1.jpg' },
-    { id: '2', imageUrl: 'https://example.com/image2.jpg' },
-    { id: '3', imageUrl: 'https://example.com/image3.jpg' },
+    { id: '1', name: 'User One', imageUrl: 'https://example.com/image1.jpg' },
+    { id: '2', name: 'User Two', imageUrl: 'https://example.com/image2.jpg' },
+    { id: '3', name: 'User Three', imageUrl: 'https://example.com/image3.jpg' },
     // ... more data
   ];
 
   return (
     <div style={{ width: 400, height: 600 }}>
-      <Mosaicify data={myData} />
+      <Mosaicify
+        data={myData}
+        withTooltip={(item) => <div>{item.name}</div>}
+        tooltipPosition="bottom"
+        tooltipAlignment="center"
+      />
     </div>
   );
 };
@@ -55,6 +60,9 @@ export default App;
 | Prop | Type | Default | Description |
 | - | - | - | - |
 | `data` | `Array<{ id: string; imageUrl: string; onClick?: () => void; [key]: string;}>` | - | An array of data objects. Each object must have an `id` and `imageUrl`. |
+| `withTooltip` | `(item) => ReactNode` | - | Optional function to render tooltip content for each grid item. |
+| `tooltipPosition` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Position of the tooltip. |
+| `tooltipAlignment` | `'start' \| 'center' \| 'end'` | `'center'` | Alignment of the tooltip. |
 | `className` | `string` | - | Optional CSS class to apply to the outer grid container. |
 | `gridClassName` | `string` | - | Optional CSS class to apply to each grid item (both images and placeholders). |
 | `numberOfColumns` | `number` | `20` | The number of columns in the grid. Higher values result in smaller tiles. |
