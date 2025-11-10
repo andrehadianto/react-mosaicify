@@ -7,7 +7,8 @@ A lightweight React component for turning data into beautiful, grid-based visual
 
 ## Demo
 
-<video src="https://github.com/andrehadianto/react-mosaicify/blob/main/assets/demo.mov" alt="Mosaicify demo" width="480"></video>
+[mosaicify demo
+](https://github.com/user-attachments/assets/de78c18e-53df-4c9d-8cbe-efe80867a7ea)
 
 ## Features
 
