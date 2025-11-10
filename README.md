@@ -12,7 +12,7 @@ A lightweight React component for turning data into beautiful, grid-based visual
 
 ## Features
 
-*   **Lightweight**: 10.7kb gzipped!
+*   **Lightweight**: 9.2kb gzipped!
 *   **Responsive Mosaic Grid**: Dense, responsive grid of tiles to visualize data.
 *   **Tooltip!**: Customise your own tooltip to show on each cell.
 
