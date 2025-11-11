@@ -64,6 +64,11 @@ interface MosaicifyProps extends ComponentPropsWithoutRef<"div"> {
    * @defaultValue 10
    */
   maxNumberOfImages?: number | undefined;
+  /**
+   * If true, disables rounded corners on all tiles.
+   * @defaultValue false
+   */
+  noRoundedCorners?: boolean | undefined;
 }
 
 /**
@@ -99,6 +104,7 @@ const Mosaicify = ({
   withTooltip,
   tooltipPosition,
   tooltipAlignment,
+  noRoundedCorners,
 }: MosaicifyProps) => {
   if (
     (minNumberOfImages && !maxNumberOfImages) ||
@@ -150,12 +156,20 @@ const Mosaicify = ({
    * @returns A space-delimited Tailwind class string controlling span/rounding.
    */
   const getSizeClass = (item: (typeof gridItems)[number]) => {
-    const imageSizeClasses = ["col-span-4 row-span-4 rounded-lg"];
+    const imageSizeClasses = [
+      `col-span-4 row-span-4 ${noRoundedCorners ? "" : "rounded-lg"}`,
+    ];
 
     const placeholderSizeClasses = [
-      ...Array(10).fill("col-span-1 row-span-1 rounded-sm"), // 10 chances for 1x1
-      ...Array(3).fill("col-span-2 row-span-2 rounded-md"), // 3 chances for 2x2
-      ...Array(1).fill("col-span-3 row-span-3 rounded-lg"), // 1 chance for 3x3
+      ...Array(10).fill(
+        `col-span-1 row-span-1 ${noRoundedCorners ? "" : "rounded-sm"}`,
+      ), // 10 chances for 1x1
+      ...Array(3).fill(
+        `col-span-2 row-span-2 ${noRoundedCorners ? "" : "rounded-md"}`,
+      ), // 3 chances for 2x2
+      ...Array(1).fill(
+        `col-span-3 row-span-3 ${noRoundedCorners ? "" : "rounded-lg"}`,
+      ), // 1 chance for 3x3
     ];
 
     if (item.type === "image") {

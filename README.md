@@ -74,3 +74,4 @@ export default App;
 | `minTileWidth` | `number` | `14` | The minimum width of each tile in pixels. The grid will fit as many columns as possible. |
 | `minNumberOfImages` | `number` | `5` | The minimum number of images to display in the mosaic. Must be used with `maxNumberOfImages`. |
 | `maxNumberOfImages` | `number` | `10` | The maximum number of images to display in the mosaic. Must be used with `minNumberOfImages`. |
+| `noRoundedCorners` | `boolean` | `false` | If true, disables rounded corners on all tiles. |
