@@ -1,5 +1,6 @@
 # React Mosaicify
 
+[![](https://badgen.net/bundlephobia/minzip/@andrehadianto/react-mosaicify)](https://bundlephobia.com/result?p=@andrehadianto/react-mosaicify)
 ![NPM Version](https://img.shields.io/npm/v/@andrehadianto/react-mosaicify?&link=https://www.npmjs.com/package/@andrehadianto/react-mosaicify)
 
 
@@ -7,12 +8,11 @@ A lightweight React component for turning data into beautiful, grid-based visual
 
 ## Demo
 
-[mosaicify demo
-](https://github.com/user-attachments/assets/de78c18e-53df-4c9d-8cbe-efe80867a7ea)
+[mosaicify demo](https://github.com/user-attachments/assets/804900f0-b3b0-44ed-8b86-262c28eed858)
 
 ## Features
 
-*   **Lightweight**: 9.2kb gzipped!
+*   **Lightweight**: 8.8kb gzipped!
 *   **Responsive Mosaic Grid**: Dense, responsive grid of tiles to visualize data.
 *   **Tooltip!**: Customise your own tooltip to show on each cell.
 
