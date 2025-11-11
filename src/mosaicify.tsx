@@ -44,11 +44,12 @@ interface MosaicifyProps extends ComponentPropsWithoutRef<"div"> {
    */
   gridClassName?: string | undefined;
   /**
-   * Number of grid columns to render. Higher values produce smaller tiles.
+   * Minimum width of each tile in pixels. The grid will fit as many columns as
+   * possible, with each column having at least this width.
    *
-   * @defaultValue 20
+   * @defaultValue 14
    */
-  numberOfColumns?: number | undefined;
+  minTileWidth?: number | undefined;
   /**
    * Minimum number of images to include in the mosaic on each render.
    * Must be provided together with `maxNumberOfImages`.
@@ -92,7 +93,7 @@ const Mosaicify = ({
   data,
   className,
   gridClassName,
-  numberOfColumns = 20,
+  minTileWidth = 14,
   minNumberOfImages = 5,
   maxNumberOfImages = 10,
   withTooltip,
@@ -115,8 +116,8 @@ const Mosaicify = ({
   }
 
   const gridTemplateColumns = useMemo(
-    () => `repeat(${numberOfColumns}, minmax(0, 1fr))`,
-    [numberOfColumns],
+    () => `repeat(auto-fit, minmax(${minTileWidth}px, 1fr))`,
+    [minTileWidth],
   );
 
   const gridItems = useMemo(() => {

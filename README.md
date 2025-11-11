@@ -71,6 +71,6 @@ export default App;
 | `tooltipAlignment` | `'start' \| 'center' \| 'end'` | `'center'` | Alignment of the tooltip. |
 | `className` | `string` | - | Optional CSS class to apply to the outer grid container. |
 | `gridClassName` | `string` | - | Optional CSS class to apply to each grid item (both images and placeholders). |
-| `numberOfColumns` | `number` | `20` | The number of columns in the grid. Higher values result in smaller tiles. |
+| `minTileWidth` | `number` | `14` | The minimum width of each tile in pixels. The grid will fit as many columns as possible. |
 | `minNumberOfImages` | `number` | `5` | The minimum number of images to display in the mosaic. Must be used with `maxNumberOfImages`. |
 | `maxNumberOfImages` | `number` | `10` | The maximum number of images to display in the mosaic. Must be used with `minNumberOfImages`. |
