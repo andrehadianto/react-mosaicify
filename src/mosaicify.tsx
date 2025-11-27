@@ -157,18 +157,18 @@ const Mosaicify = ({
    */
   const getSizeClass = (item: (typeof gridItems)[number]) => {
     const imageSizeClasses = [
-      `col-span-4 row-span-4 ${noRoundedCorners ? "" : "rounded-lg"}`,
+      `col-span-4 row-span-4 hover:scale-105 ${noRoundedCorners ? "" : "rounded-lg"}`,
     ];
 
     const placeholderSizeClasses = [
       ...Array(10).fill(
-        `col-span-1 row-span-1 ${noRoundedCorners ? "" : "rounded-sm"}`,
+        `col-span-1 row-span-1 hover:scale-[1.3] ${noRoundedCorners ? "" : "rounded-sm"}`,
       ), // 10 chances for 1x1
       ...Array(3).fill(
-        `col-span-2 row-span-2 ${noRoundedCorners ? "" : "rounded-md"}`,
+        `col-span-2 row-span-2 hover:scale-[1.15] ${noRoundedCorners ? "" : "rounded-md"}`,
       ), // 3 chances for 2x2
       ...Array(1).fill(
-        `col-span-3 row-span-3 ${noRoundedCorners ? "" : "rounded-lg"}`,
+        `col-span-3 row-span-3 hover:scale-105 ${noRoundedCorners ? "" : "rounded-lg"}`,
       ), // 1 chance for 3x3
     ];
 
@@ -185,7 +185,7 @@ const Mosaicify = ({
 
   return (
     <div
-      className={twMerge("grid [grid-auto-flow:dense] gap-0.5", className)}
+      className={twMerge("grid grid-flow-dense [grid-auto-flow:dense] gap-0.5", className)}
       style={{ gridTemplateColumns }}
     >
       {gridItems.map((item) => {
@@ -196,10 +196,11 @@ const Mosaicify = ({
           if (item.type === "image") {
             return (
               <div
+                key={item.id}
                 className={twMerge(
                   "relative aspect-square overflow-hidden",
                   "bg-slate-600 hover:opacity-80",
-                  "duration-200 hover:scale-105 hover:shadow-2xl",
+                  "duration-200 hover:shadow-2xl",
                   sizeClass,
                   gridClassName,
                 )}
@@ -215,9 +216,10 @@ const Mosaicify = ({
           }
           return (
             <div
+              key={item.id}
               className={twMerge(
                 "aspect-square bg-slate-600 hover:bg-slate-800",
-                "duration-200 hover:scale-105 hover:shadow-2xl",
+                "duration-200 hover:shadow-2xl",
                 sizeClass,
                 gridClassName,
               )}

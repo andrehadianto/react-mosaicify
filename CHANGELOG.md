@@ -1,3 +1,7 @@
+### v0.3.1
+* added key index to list of grid item.
+* more dynamic hover:scale for different cell size.
+
 ### v0.3.0
 
 * `minTileWidth` and `noRoundedCorners`. Read the API docs for more information!

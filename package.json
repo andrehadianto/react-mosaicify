@@ -1,6 +1,6 @@
 {
   "name": "@andrehadianto/react-mosaicify",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A lightweight React component for turning data into beautiful, grid-based visualizations.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
